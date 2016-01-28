@@ -36,10 +36,7 @@ namespace VendingMachine
 
                 .Then(vendingMachine,
                     Is(AVendingMachine.With()
-                        .Total(188)
-                        .DispensedProducts()
-                        .Display(AString.Null())
-                        .ReturnedCoins()));
+                        .Total(188)));
         }
 
         [Test]
