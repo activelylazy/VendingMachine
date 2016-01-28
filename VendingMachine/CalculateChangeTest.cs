@@ -42,8 +42,9 @@ namespace VendingMachine
                 .Then(result, Is(AList.InOrder().WithOnlyValues(coin)));
         }
 
-        [Test]
-        public void GivesChangeStartingFromLargestPossibleCoin()
+        [TestCase(198, new[] { 100, 50, 20, 20, 5, 2, 1 })]
+        [TestCase(35, new[] { 20, 10, 5 })]
+        public void GivesChangeStartingFromLargestPossibleCoin(int amount, int[] coins)
         {
             CalculateChange calculateChange;
             IList<int> result;
@@ -51,9 +52,9 @@ namespace VendingMachine
             Scenario()
                 .Given(calculateChange = new CalculateChange())
 
-                .When(result = calculateChange.ChangeFor(198))
+                .When(result = calculateChange.ChangeFor(amount))
 
-                .Then(result, Is(AList.InOrder().WithOnlyValues(100, 50, 20, 20, 5, 2, 1)));
+                .Then(result, Is(AList.InOrder().WithOnlyValues(coins)));
         }
     }
 }
