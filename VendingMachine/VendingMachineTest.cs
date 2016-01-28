@@ -53,5 +53,20 @@ namespace VendingMachine
                 .Then(vendingMachine.ReturnedCoins, 
                       Is(AList.InOrder().WithOnlyValues("3", "9")));
         }
+
+        [Test]
+        public void DispensesProductForExactMoney()
+        {
+            VendingMachine vendingMachine;
+
+            Scenario()
+                .Given(vendingMachine = new VendingMachine())
+                .Given(() => vendingMachine.AddCoin("100"))
+
+                .When(() => vendingMachine.RequestProduct("cola"))
+
+                .Then(vendingMachine.DispensedProducts,
+                      Is(AList.InOrder().WithOnlyValues("cola")));
+        }
     }
 }

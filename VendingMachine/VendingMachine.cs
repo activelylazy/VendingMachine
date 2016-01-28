@@ -7,10 +7,12 @@ namespace VendingMachine
         public VendingMachine()
         {
             ReturnedCoins = new List<string>();
+            DispensedProducts = new List<string>();
         }
 
         public int Total { get; private set; }
         public IList<string> ReturnedCoins { get; private set; }
+        public IList<string> DispensedProducts { get; private set; } 
 
         public void AddCoin(string coin)
         {
@@ -30,6 +32,12 @@ namespace VendingMachine
                 Total += 100;
             else
                 ReturnedCoins.Add(coin);
+        }
+
+        public void RequestProduct(string productName)
+        {
+            if (productName == "cola")
+                DispensedProducts.Add(productName);
         }
     }
 }
