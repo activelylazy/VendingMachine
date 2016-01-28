@@ -8,20 +8,18 @@ namespace VendingMachine
     public class VendingMachineTest : AbstractNUnitScenarioTest
     {
         [Test]
-        public void AddingPennyIncrementsValue()
+        public void InitialValueIsZero()
         {
             VendingMachine vendingMachine;
 
             Scenario()
                 .Given(vendingMachine = new VendingMachine())
 
-                .When(() => vendingMachine.AddCoin("1"))
-
-                .Then(vendingMachine.Total, Is(AnInt.EqualTo(1)));
+                .Then(vendingMachine.Total, Is(AnInt.EqualTo(0)));
         }
 
         [Test]
-        public void AddingMultipleCoinsIncrementsValue()
+        public void AddingCoinsIncrementsValue()
         {
             VendingMachine vendingMachine;
 
