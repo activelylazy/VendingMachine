@@ -68,5 +68,19 @@ namespace VendingMachine
                 .Then(vendingMachine.DispensedProducts,
                       Is(AList.InOrder().WithOnlyValues("cola")));
         }
+
+        [Test]
+        public void ShowsErrorIfNotEnoughMoneyAdded()
+        {
+            VendingMachine vendingMachine;
+
+            Scenario()
+                .Given(vendingMachine = new VendingMachine())
+
+                .When(() => vendingMachine.RequestProduct("cola"))
+
+                .Then(vendingMachine.DispensedProducts, Is(AList.NoItems<string>()))
+                .Then(vendingMachine.Display, Is(AString.EqualTo("INSERT MORE COINS")));
+        }
     }
 }

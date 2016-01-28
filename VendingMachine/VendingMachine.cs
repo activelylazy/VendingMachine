@@ -12,7 +12,8 @@ namespace VendingMachine
 
         public int Total { get; private set; }
         public IList<string> ReturnedCoins { get; private set; }
-        public IList<string> DispensedProducts { get; private set; } 
+        public IList<string> DispensedProducts { get; private set; }
+        public string Display { get; private set; }
 
         public void AddCoin(string coin)
         {
@@ -36,8 +37,10 @@ namespace VendingMachine
 
         public void RequestProduct(string productName)
         {
-            if (productName == "cola")
+            if (productName == "cola" && Total >= 100)
                 DispensedProducts.Add(productName);
+            else
+                Display = "INSERT MORE COINS";
         }
     }
 }
