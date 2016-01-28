@@ -41,5 +41,19 @@ namespace VendingMachine
 
                 .Then(result, Is(AList.InOrder().WithOnlyValues(coin)));
         }
+
+        [Test]
+        public void GivesChangeStartingFromLargestPossibleCoin()
+        {
+            CalculateChange calculateChange;
+            IList<int> result;
+
+            Scenario()
+                .Given(calculateChange = new CalculateChange())
+
+                .When(result = calculateChange.ChangeFor(198))
+
+                .Then(result, Is(AList.InOrder().WithOnlyValues(100, 50, 20, 20, 5, 2, 1)));
+        }
     }
 }
