@@ -15,7 +15,12 @@ namespace VendingMachine
             Scenario()
                 .Given(vendingMachine = new VendingMachine())
 
-                .Then(vendingMachine.Total, Is(AnInt.EqualTo(0)));
+                .Then(vendingMachine,
+                      Is(AVendingMachine.With()
+                        .Total(0)
+                        .DispensedProducts()
+                        .Display(AString.Null())
+                        .ReturnedCoins()));
         }
 
         [Test]
@@ -34,7 +39,12 @@ namespace VendingMachine
                 .When(() => vendingMachine.AddCoin("50"))
                 .When(() => vendingMachine.AddCoin("100"))
 
-                .Then(vendingMachine.Total, Is(AnInt.EqualTo(188)));
+                .Then(vendingMachine,
+                    Is(AVendingMachine.With()
+                        .Total(188)
+                        .DispensedProducts()
+                        .Display(AString.Null())
+                        .ReturnedCoins()));
         }
 
         [Test]
@@ -49,9 +59,12 @@ namespace VendingMachine
                 .When(() => vendingMachine.AddCoin("3"))
                 .When(() => vendingMachine.AddCoin("9"))
 
-                .Then(vendingMachine.Total, Is(AnInt.EqualTo(2)))
-                .Then(vendingMachine.ReturnedCoins, 
-                      Is(AList.InOrder().WithOnlyValues("3", "9")));
+                .Then(vendingMachine,
+                    Is(AVendingMachine.With()
+                        .Total(2)
+                        .DispensedProducts()
+                        .Display(AString.Null())
+                        .ReturnedCoins("3", "9")));
         }
 
         [Test]
@@ -65,9 +78,12 @@ namespace VendingMachine
 
                 .When(() => vendingMachine.RequestProduct(Product.Cola))
 
-                .Then(vendingMachine.DispensedProducts,
-                      Is(AList.InOrder().WithOnlyValues(Product.Cola)))
-                .Then(vendingMachine.Display, Is(AString.EqualTo("THANK YOU")));
+                .Then(vendingMachine,
+                    Is(AVendingMachine.With()
+                        //.Total(0)
+                        .DispensedProducts(Product.Cola)
+                        .Display("THANK YOU")
+                        .ReturnedCoins()));
         }
 
         [Test]
@@ -80,8 +96,12 @@ namespace VendingMachine
 
                 .When(() => vendingMachine.RequestProduct(Product.Cola))
 
-                .Then(vendingMachine.DispensedProducts, Is(AList.NoItems<string>()))
-                .Then(vendingMachine.Display, Is(AString.EqualTo("INSERT MORE COINS")));
+                .Then(vendingMachine,
+                    Is(AVendingMachine.With()
+                        .Total(0)
+                        .DispensedProducts()
+                        .Display("INSERT MORE COINS")
+                        .DispensedProducts()));
         }
     }
 }
