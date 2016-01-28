@@ -1,11 +1,11 @@
 ﻿using NUnit.Framework;
-using TestFirst.Net.Extensions.NUnit;
+using TestFirst.Net.Extensions.Moq;
 using TestFirst.Net.Matcher;
 
 namespace VendingMachine
 {
     [TestFixture]
-    public class VendingMachineTest : AbstractNUnitScenarioTest
+    public class VendingMachineTest : AbstractNUnitMoqScenarioTest
     {
         [Test]
         public void InitialValueIsZero()
@@ -102,6 +102,30 @@ namespace VendingMachine
                         .DispensedProducts()
                         .Display("INSERT MORE COINS")
                         .DispensedProducts()));
+        }
+
+        [Test]
+        [Ignore("wip")]
+        public void GivesChange()
+        {
+            VendingMachine vendingMachine;
+            ICalculateChange calculateChange;
+
+            Scenario()
+                .Given(calculateChange = AMock<ICalculateChange>()
+                    .WhereMethod(c => c.ChangeFor(35)).Returns(new[] { 20, 10, 5 })
+                    .Instance)
+                .Given(vendingMachine = new VendingMachine(calculateChange))
+                .Given(() => vendingMachine.AddCoin("100"))
+
+                .When(() => vendingMachine.RequestProduct(Product.Candy))
+
+                .Then(vendingMachine,
+                    Is(AVendingMachine.With()
+                        .Total(0)
+                        .DispensedProducts(Product.Candy)
+                        .Display("THANK YOU")
+                        .ReturnedCoins("20", "10", "5")));
         }
     }
 }

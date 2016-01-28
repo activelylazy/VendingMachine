@@ -2,15 +2,17 @@
 
 namespace VendingMachine
 {
-    enum Product
-    {
-        Cola
-    }
-
     class VendingMachine
     {
+        private readonly ICalculateChange _calculateChange;
+
         public VendingMachine()
+            : this(new CalculateChange())
+        { }
+
+        public VendingMachine(ICalculateChange calculateChange)
         {
+            _calculateChange = calculateChange;
             ReturnedCoins = new List<string>();
             DispensedProducts = new List<Product>();
         }
