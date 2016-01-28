@@ -54,8 +54,6 @@ namespace VendingMachine
                 .Then(vendingMachine,
                     Is(AVendingMachine.With()
                         .Total(2)
-                        .DispensedProducts()
-                        .Display(AString.Null())
                         .ReturnedCoins(AList.InOrder().WithOnlyValues("3", "9"))));
         }
 
