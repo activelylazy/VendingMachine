@@ -89,7 +89,6 @@ namespace VendingMachine
                 .Then(vendingMachine,
                     Is(AVendingMachine.With()
                         .Total(0)
-                        .DispensedProducts()
                         .Display("INSERT MORE COINS")
                         .DispensedProducts()));
         }
