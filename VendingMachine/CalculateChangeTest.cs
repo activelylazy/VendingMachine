@@ -8,6 +8,20 @@ namespace VendingMachine
     [TestFixture]
     public class CalculateChangeTest : AbstractNUnitScenarioTest
     {
+        [Test]
+        public void ChangeForZeroIsEmpty()
+        {
+            CalculateChange calculateChange;
+            IList<int> result;
+
+            Scenario()
+                .Given(calculateChange = new CalculateChange())
+
+                .When(result = calculateChange.ChangeFor(0))
+
+                .Then(result, Is(AList.NoItems<int>()));
+        }
+
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(5)]
