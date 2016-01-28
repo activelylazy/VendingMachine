@@ -43,9 +43,15 @@ namespace VendingMachine
         public void RequestProduct(Product product)
         {
             if (product == Product.Cola && Total >= 100)
-                DispensedProducts.Add(product);
+                DispenseProduct(product);
             else
                 Display = "INSERT MORE COINS";
+        }
+
+        private void DispenseProduct(Product product)
+        {
+            Display = "THANK YOU";
+            DispensedProducts.Add(product);
         }
     }
 }

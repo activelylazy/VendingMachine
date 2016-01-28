@@ -66,7 +66,8 @@ namespace VendingMachine
                 .When(() => vendingMachine.RequestProduct(Product.Cola))
 
                 .Then(vendingMachine.DispensedProducts,
-                      Is(AList.InOrder().WithOnlyValues(Product.Cola)));
+                      Is(AList.InOrder().WithOnlyValues(Product.Cola)))
+                .Then(vendingMachine.Display, Is(AString.EqualTo("THANK YOU")));
         }
 
         [Test]
