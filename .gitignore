@@ -1,0 +1,10 @@
+*.suo
+bin
+Debug
+Release
+*.obj
+packages
+*.user
+StyleCop.Cache
+TestResult.xml
+*.nupkg
