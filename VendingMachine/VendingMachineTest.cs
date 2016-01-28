@@ -15,6 +15,8 @@ namespace VendingMachine
             Scenario()
                 .Given(vendingMachine = new VendingMachine())
 
+                .WhenNothing()
+
                 .Then(vendingMachine.Total, Is(AnInt.EqualTo(0)));
         }
 
