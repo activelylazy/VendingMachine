@@ -105,7 +105,6 @@ namespace VendingMachine
         }
 
         [Test]
-        [Ignore("wip")]
         public void GivesChange()
         {
             VendingMachine vendingMachine;

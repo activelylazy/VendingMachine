@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace VendingMachine
 {
@@ -45,15 +46,20 @@ namespace VendingMachine
         public void RequestProduct(Product product)
         {
             if (product == Product.Cola && Total >= 100)
-                DispenseProduct(product);
+                DispenseProduct(product, 100);
+            else if (product == Product.Candy && Total >= 65)
+                DispenseProduct(product, 65);
             else
                 Display = "INSERT MORE COINS";
         }
 
-        private void DispenseProduct(Product product)
+        private void DispenseProduct(Product product, int cost)
         {
             Display = "THANK YOU";
             DispensedProducts.Add(product);
+            ReturnedCoins = _calculateChange.ChangeFor(Total - cost)
+                .Select(coin => coin.ToString())
+                .ToList();
             Total = 0;
         }
     }
