@@ -38,5 +38,22 @@ namespace VendingMachine
 
                 .Then(vendingMachine.Total, Is(AnInt.EqualTo(188)));
         }
+
+        [Test]
+        public void AddingUnrecognisedCoinAddsToReturnedCoins()
+        {
+            VendingMachine vendingMachine;
+
+            Scenario()
+                .Given(vendingMachine = new VendingMachine())
+
+                .When(() => vendingMachine.AddCoin("2"))
+                .When(() => vendingMachine.AddCoin("3"))
+                .When(() => vendingMachine.AddCoin("9"))
+
+                .Then(vendingMachine.Total, Is(AnInt.EqualTo(2)))
+                .Then(vendingMachine.ReturnedCoins, 
+                      Is(AList.InOrder().WithOnlyValues("3", "9")));
+        }
     }
 }

@@ -1,8 +1,16 @@
-﻿namespace VendingMachine
+﻿using System.Collections.Generic;
+
+namespace VendingMachine
 {
     class VendingMachine
     {
+        public VendingMachine()
+        {
+            ReturnedCoins = new List<string>();
+        }
+
         public int Total { get; private set; }
+        public IList<string> ReturnedCoins { get; private set; }
 
         public void AddCoin(string coin)
         {
@@ -20,6 +28,8 @@
                 Total += 50;
             else if (coin == "100")
                 Total += 100;
+            else
+                ReturnedCoins.Add(coin);
         }
     }
 }
