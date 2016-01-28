@@ -15,12 +15,7 @@ namespace VendingMachine
             Scenario()
                 .Given(vendingMachine = new VendingMachine())
 
-                .Then(vendingMachine,
-                      Is(AVendingMachine.With()
-                        .Total(0)
-                        .DispensedProducts()
-                        .Display(AString.Null())
-                        .ReturnedCoins()));
+                .Then(vendingMachine.Total, Is(AnInt.EqualTo(0)));
         }
 
         [Test]
