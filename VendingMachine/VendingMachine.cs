@@ -2,17 +2,22 @@
 
 namespace VendingMachine
 {
+    enum Product
+    {
+        Cola
+    }
+
     class VendingMachine
     {
         public VendingMachine()
         {
             ReturnedCoins = new List<string>();
-            DispensedProducts = new List<string>();
+            DispensedProducts = new List<Product>();
         }
 
         public int Total { get; private set; }
         public IList<string> ReturnedCoins { get; private set; }
-        public IList<string> DispensedProducts { get; private set; }
+        public IList<Product> DispensedProducts { get; private set; }
         public string Display { get; private set; }
 
         public void AddCoin(string coin)
@@ -35,10 +40,10 @@ namespace VendingMachine
                 ReturnedCoins.Add(coin);
         }
 
-        public void RequestProduct(string productName)
+        public void RequestProduct(Product product)
         {
-            if (productName == "cola" && Total >= 100)
-                DispensedProducts.Add(productName);
+            if (product == Product.Cola && Total >= 100)
+                DispensedProducts.Add(product);
             else
                 Display = "INSERT MORE COINS";
         }

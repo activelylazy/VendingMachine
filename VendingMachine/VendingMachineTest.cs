@@ -63,10 +63,10 @@ namespace VendingMachine
                 .Given(vendingMachine = new VendingMachine())
                 .Given(() => vendingMachine.AddCoin("100"))
 
-                .When(() => vendingMachine.RequestProduct("cola"))
+                .When(() => vendingMachine.RequestProduct(Product.Cola))
 
                 .Then(vendingMachine.DispensedProducts,
-                      Is(AList.InOrder().WithOnlyValues("cola")));
+                      Is(AList.InOrder().WithOnlyValues(Product.Cola)));
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace VendingMachine
             Scenario()
                 .Given(vendingMachine = new VendingMachine())
 
-                .When(() => vendingMachine.RequestProduct("cola"))
+                .When(() => vendingMachine.RequestProduct(Product.Cola))
 
                 .Then(vendingMachine.DispensedProducts, Is(AList.NoItems<string>()))
                 .Then(vendingMachine.Display, Is(AString.EqualTo("INSERT MORE COINS")));
