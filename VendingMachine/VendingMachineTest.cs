@@ -80,7 +80,7 @@ namespace VendingMachine
 
                 .Then(vendingMachine,
                     Is(AVendingMachine.With()
-                        //.Total(0)
+                        .Total(0)
                         .DispensedProducts(Product.Cola)
                         .Display("THANK YOU")
                         .ReturnedCoins()));

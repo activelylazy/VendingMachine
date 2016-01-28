@@ -52,6 +52,7 @@ namespace VendingMachine
         {
             Display = "THANK YOU";
             DispensedProducts.Add(product);
+            Total = 0;
         }
     }
 }
