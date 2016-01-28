@@ -6,7 +6,7 @@ namespace VendingMachine
     {
         public IList<int> ChangeFor(int amount)
         {
-            throw new System.NotImplementedException();
+            return new[] {amount};
         }
     }
 }
